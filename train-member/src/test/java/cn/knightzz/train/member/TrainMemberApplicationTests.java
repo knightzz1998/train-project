@@ -1,10 +1,10 @@
-package cn.knightzz.train;
+package cn.knightzz.train.member;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TrainProjectApplicationTests {
+class TrainMemberApplicationTests {
 
     @Test
     void contextLoads() {

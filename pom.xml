@@ -11,8 +11,12 @@
     <groupId>cn.knightzz</groupId>
     <artifactId>train-project</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
     <name>train-project</name>
     <description>train-project</description>
+    <modules>
+        <module>train-member</module>
+    </modules>
     <properties>
         <java.version>17</java.version>
         <spring-cloud.version>2022.0.0</spring-cloud.version>
