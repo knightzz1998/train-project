@@ -1,3 +1,8 @@
 GET http://localhost:8001/train-member/hello
 Accept: application/json
+
+### 网关接口转发地址
+GET http://localhost:8000/train-member/hello
+Accept: application/json
+
 ###
