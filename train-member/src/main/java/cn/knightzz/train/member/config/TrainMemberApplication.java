@@ -1,4 +1,4 @@
-package cn.knightzz.train.member.member.config;
+package cn.knightzz.train.member.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

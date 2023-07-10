@@ -1,4 +1,4 @@
-package cn.knightzz.train.member.member.aspect;
+package cn.knightzz.train.common.aspect;
 
 import cn.hutool.core.util.IdUtil;
 import com.alibaba.fastjson.JSONObject;
