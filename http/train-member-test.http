@@ -14,3 +14,9 @@ POST http://localhost:8000/train-member/member/register
 Content-Type: application/x-www-form-urlencoded
 
 mobile=15565946702
+
+### 测试验证码发送
+POST http://localhost:8000/train-member/member/send-code
+Content-Type: application/x-www-form-urlencoded
+
+mobile=15565946703

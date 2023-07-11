@@ -2,6 +2,7 @@ package cn.knightzz.train.member.controller;
 
 import cn.knightzz.train.common.response.CommonResp;
 import cn.knightzz.train.member.request.MemberRegisterReq;
+import cn.knightzz.train.member.request.MemberSendCodeReq;
 import cn.knightzz.train.member.service.MemberService;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
@@ -38,6 +39,14 @@ public class MemberController {
         long id = memberService.register(registerReq.getMobile());
         CommonResp<Long> commonResp = new CommonResp<>();
         commonResp.setContent(id);
+        return commonResp;
+    }
+
+    @PostMapping("/send-code")
+    public CommonResp<String> sendCode(@Valid MemberSendCodeReq sendCodeReq) {
+        String code = memberService.sendCode(sendCodeReq.getMobile());
+        CommonResp<String> commonResp = new CommonResp<>();
+        commonResp.setContent(code);
         return commonResp;
     }
 }
