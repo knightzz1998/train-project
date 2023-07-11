@@ -1,5 +1,7 @@
 package cn.knightzz.train.member.controller;
 
+import cn.knightzz.train.common.response.CommonResp;
+import cn.knightzz.train.member.request.MemberRegisterReq;
 import cn.knightzz.train.member.service.MemberService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,13 +26,17 @@ public class MemberController {
     MemberService memberService;
 
     @GetMapping("/count")
-    public String count() {
-        return "count = " + memberService.count();
+    public CommonResp<Integer> count() {
+        CommonResp<Integer> commonResp = new CommonResp<>();
+        commonResp.setContent(memberService.count());
+        return commonResp;
     }
 
     @PostMapping("/register")
-    public String register(String mobile) {
-        long id = memberService.register(mobile);
-        return "id = " + id;
+    public CommonResp<Long> register(MemberRegisterReq registerReq) {
+        long id = memberService.register(registerReq.getMobile());
+        CommonResp<Long> commonResp = new CommonResp<>();
+        commonResp.setContent(id);
+        return commonResp;
     }
 }
