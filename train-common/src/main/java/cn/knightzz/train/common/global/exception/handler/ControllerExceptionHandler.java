@@ -4,9 +4,11 @@ import cn.knightzz.train.common.exception.BusinessException;
 import cn.knightzz.train.common.response.CommonResp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 
 /**
  * @author 王天赐
@@ -49,7 +51,7 @@ public class ControllerExceptionHandler {
      */
     @ExceptionHandler(value = BusinessException.class)
     @ResponseBody
-    public CommonResp<String> businessExceptionHandler(BusinessException e) {
+    public CommonResp<String> exceptionHandler(BusinessException e) {
 
         CommonResp<String> commonResp = new CommonResp<>();
         LOG.error("业务异常 : {}", e.getE().getDesc());
@@ -59,5 +61,27 @@ public class ControllerExceptionHandler {
 
         return commonResp;
     }
+
+
+    /**
+     * 处理校验异常
+     *
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(value = BindException.class)
+    @ResponseBody
+    public CommonResp<String> exceptionHandler(BindException e) {
+
+        CommonResp<String> commonResp = new CommonResp<>();
+        String message = e.getBindingResult().getAllErrors().get(0).getDefaultMessage();
+        LOG.error("数据校验异常 : {}", message);
+
+        commonResp.setSuccess(false);
+        commonResp.setMessage(message);
+
+        return commonResp;
+    }
+
 
 }

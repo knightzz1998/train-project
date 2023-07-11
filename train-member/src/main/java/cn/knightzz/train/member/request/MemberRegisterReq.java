@@ -1,5 +1,7 @@
 package cn.knightzz.train.member.request;
 
+import jakarta.validation.constraints.NotBlank;
+
 /**
  * @author 王天赐
  * @title: MemberRegisterReq
@@ -11,6 +13,7 @@ package cn.knightzz.train.member.request;
  */
 public class MemberRegisterReq {
 
+    @NotBlank(message = "[手机号] 不能为空")
     private String mobile;
 
     public String getMobile() {
