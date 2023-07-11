@@ -8,3 +8,9 @@ Accept: application/json
 ### 测试MyBatis
 GET http://localhost:8000/train-member/member/count
 Accept: application/json
+
+### 测试注册
+POST http://localhost:8000/train-member/member/register
+Content-Type: application/x-www-form-urlencoded
+
+mobile=111

@@ -3,6 +3,7 @@ package cn.knightzz.train.member.controller;
 import cn.knightzz.train.member.service.MemberService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,5 +26,11 @@ public class MemberController {
     @GetMapping("/count")
     public String count() {
         return "count = " + memberService.count();
+    }
+
+    @PostMapping("/register")
+    public String register(String mobile) {
+        long id = memberService.register(mobile);
+        return "id = " + id;
     }
 }
