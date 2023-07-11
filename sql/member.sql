@@ -1,5 +1,5 @@
-create database if not exists `train`;
-use `train`;
+create database if not exists `train_member`;
+use `train_member`;
 drop table if exists `member`;
 create table `member`
 (

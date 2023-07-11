@@ -1,15 +1,31 @@
 package cn.knightzz.train.member.mapper;
 
-/**
- * @author 王天赐
- * @title: MemberMapper
- * @projectName train-project
- * @description:
- * @website <a href="https://knightzz.cn/">https://knightzz.cn/</a>
- * @github <a href="https://github.com/knightzz1998">https://github.com/knightzz1998</a>
- * @create: 2023-07-11 10:29
- */
-public interface MemberMapper {
+import cn.knightzz.train.member.domain.Member;
+import cn.knightzz.train.member.domain.MemberExample;
+import org.apache.ibatis.annotations.Param;
 
-    int count();
+import java.util.List;
+
+public interface MemberMapper {
+    long countByExample(MemberExample example);
+
+    int deleteByExample(MemberExample example);
+
+    int deleteByPrimaryKey(Long id);
+
+    int insert(Member record);
+
+    int insertSelective(Member record);
+
+    List<Member> selectByExample(MemberExample example);
+
+    Member selectByPrimaryKey(Long id);
+
+    int updateByExampleSelective(@Param("record") Member record, @Param("example") MemberExample example);
+
+    int updateByExample(@Param("record") Member record, @Param("example") MemberExample example);
+
+    int updateByPrimaryKeySelective(Member record);
+
+    int updateByPrimaryKey(Member record);
 }
