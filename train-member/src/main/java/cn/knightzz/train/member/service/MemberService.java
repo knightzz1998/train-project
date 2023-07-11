@@ -1,6 +1,8 @@
 package cn.knightzz.train.member.service;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.knightzz.train.common.exception.BusinessException;
+import cn.knightzz.train.common.exception.BusinessExceptionEnum;
 import cn.knightzz.train.member.domain.Member;
 import cn.knightzz.train.member.domain.MemberExample;
 import cn.knightzz.train.member.mapper.MemberMapper;
@@ -34,8 +36,7 @@ public class MemberService {
         memberExample.createCriteria().andMobileEqualTo(mobile);
         List<Member> memberList = memberMapper.selectByExample(memberExample);
         if (CollUtil.isNotEmpty(memberList)) {
-            // return memberList.get(0).getId();
-            throw new RuntimeException("手机号已注册!");
+            throw new BusinessException(BusinessExceptionEnum.MEMBER_MOBILE_EXIST);
         }
 
 
