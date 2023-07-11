@@ -5,4 +5,6 @@ Accept: application/json
 GET http://localhost:8000/train-member/hello
 Accept: application/json
 
-###
+### 测试MyBatis
+GET http://localhost:8000/train-member/member/count
+Accept: application/json

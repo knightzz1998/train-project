@@ -1,5 +1,6 @@
 package cn.knightzz.train.member.config;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -12,6 +13,7 @@ import org.springframework.core.env.Environment;
  */
 @SpringBootApplication
 @ComponentScan("cn.knightzz")
+@MapperScan("cn.knightzz.train.member.mapper")
 public class TrainMemberApplication {
 
     private static final Logger LOG = LoggerFactory.getLogger(TrainMemberApplication.class);
