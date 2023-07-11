@@ -33,7 +33,7 @@ public class ControllerExceptionHandler {
     public CommonResp<String> exceptionHandler(Exception e) {
 
         CommonResp<String> commonResp = new CommonResp<>();
-        LOG.error("系统异常", e);
+        LOG.error("系统异常 : {}", e.getMessage());
 
         commonResp.setSuccess(false);
         commonResp.setMessage("系统执行错误, 请联系管理员");
@@ -52,7 +52,7 @@ public class ControllerExceptionHandler {
     public CommonResp<String> businessExceptionHandler(BusinessException e) {
 
         CommonResp<String> commonResp = new CommonResp<>();
-        LOG.error("系统异常", e);
+        LOG.error("业务异常 : {}", e.getE().getDesc());
 
         commonResp.setSuccess(false);
         commonResp.setMessage(e.getE().getDesc());
