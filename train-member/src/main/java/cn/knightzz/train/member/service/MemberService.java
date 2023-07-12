@@ -1,12 +1,17 @@
 package cn.knightzz.train.member.service;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.RandomUtil;
 import cn.knightzz.train.common.exception.BusinessException;
 import cn.knightzz.train.common.exception.BusinessExceptionEnum;
 import cn.knightzz.train.common.util.SnowUtil;
 import cn.knightzz.train.member.domain.Member;
 import cn.knightzz.train.member.domain.MemberExample;
 import cn.knightzz.train.member.mapper.MemberMapper;
+import cn.knightzz.train.member.request.MemberLoginReq;
+import cn.knightzz.train.member.response.MemberLoginResp;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,15 +42,12 @@ public class MemberService {
 
     public long register(String mobile) {
 
-        MemberExample memberExample = new MemberExample();
-        memberExample.createCriteria().andMobileEqualTo(mobile);
-        List<Member> memberList = memberMapper.selectByExample(memberExample);
-        if (CollUtil.isNotEmpty(memberList)) {
+        Member member = selectByMobile(mobile);
+        if (ObjectUtil.isNotNull(member)) {
             throw new BusinessException(BusinessExceptionEnum.MEMBER_MOBILE_EXIST);
         }
 
-
-        Member member = new Member();
+        member = new Member();
         member.setId(SnowUtil.getSnowflakeNextId());
         member.setMobile(mobile);
         memberMapper.insert(member);
@@ -57,17 +59,14 @@ public class MemberService {
         // 1. 后端接口校验[注解]
         // 2. 判断手机号是否已经注册了
 
-        MemberExample memberExample = new MemberExample();
-        memberExample.createCriteria().andMobileEqualTo(mobile);
-        List<Member> memberList = memberMapper.selectByExample(memberExample);
+        Member member = selectByMobile(mobile);
 
         // 手机号尚未注册, 插入到数据库
-        if (CollUtil.isEmpty(memberList)) {
-            Member member = new Member();
+        if (ObjectUtil.isNull(member)) {
+            member = new Member();
             member.setId(SnowUtil.getSnowflakeNextId());
             member.setMobile(mobile);
             memberMapper.insert(member);
-
             LOG.info("手机号 {} 不存在, 插入记录", mobile);
         } else {
             LOG.info("手机号 {} 已存在, 不插入记录", mobile);
@@ -86,5 +85,40 @@ public class MemberService {
         LOG.info("对接短信通道, 发送短信");
 
         return code;
+    }
+
+    public MemberLoginResp login(MemberLoginReq req) {
+
+        String mobile = req.getMobile();
+        String code = req.getCode();
+
+        // 1. 查询当前用户是否已经注册
+        Member member = selectByMobile(mobile);
+
+        if(ObjectUtil.isNull(member)) {
+            throw new BusinessException(BusinessExceptionEnum.MEMBER_MOBILE_NOT_EXIST);
+        }
+
+        if(!"8888".equals(code)) {
+            throw new BusinessException(BusinessExceptionEnum.MEMBER_MOBILE_CODE_ERROR);
+        }
+
+        // 拷贝属性
+        MemberLoginResp memberLoginResp = BeanUtil.copyProperties(member, MemberLoginResp.class);
+        // TODO 暂时使用字符串代替, 后续使用JWT
+        memberLoginResp.setToken(RandomUtil.randomString(6));
+        return memberLoginResp;
+    }
+
+    public Member selectByMobile(String mobile) {
+        MemberExample memberExample = new MemberExample();
+        memberExample.createCriteria().andMobileEqualTo(mobile);
+        List<Member> memberList = memberMapper.selectByExample(memberExample);
+
+        if(CollUtil.isEmpty(memberList)) {
+            return null;
+        }else {
+            return memberList.get(0);
+        }
     }
 }

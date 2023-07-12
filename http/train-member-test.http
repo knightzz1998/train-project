@@ -20,3 +20,9 @@ POST http://localhost:8000/train-member/member/send-code
 Content-Type: application/x-www-form-urlencoded
 
 mobile=15565946703
+
+### 测试登录
+POST http://localhost:8000/train-member/member/login
+Content-Type: application/x-www-form-urlencoded
+
+mobile=15565946703&code=8888

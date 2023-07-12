@@ -1,8 +1,10 @@
 package cn.knightzz.train.member.controller;
 
 import cn.knightzz.train.common.response.CommonResp;
+import cn.knightzz.train.member.request.MemberLoginReq;
 import cn.knightzz.train.member.request.MemberRegisterReq;
 import cn.knightzz.train.member.request.MemberSendCodeReq;
+import cn.knightzz.train.member.response.MemberLoginResp;
 import cn.knightzz.train.member.service.MemberService;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
@@ -48,5 +50,11 @@ public class MemberController {
         CommonResp<String> commonResp = new CommonResp<>();
         commonResp.setContent(code);
         return commonResp;
+    }
+
+    @PostMapping("/login")
+    public CommonResp<MemberLoginResp> login(@Valid MemberLoginReq loginReq) {
+        MemberLoginResp loginResp = memberService.login(loginReq);
+        return new CommonResp<>(loginResp);
     }
 }
