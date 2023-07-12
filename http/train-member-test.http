@@ -17,12 +17,18 @@ mobile=15565946702
 
 ### 测试验证码发送
 POST http://localhost:8000/train-member/member/send-code
-Content-Type: application/x-www-form-urlencoded
+Content-Type: application/json
 
-mobile=15565946703
+{
+  "mobile": 15565946702
+}
+
 
 ### 测试登录
 POST http://localhost:8000/train-member/member/login
-Content-Type: application/x-www-form-urlencoded
+Content-Type: application/json
 
-mobile=15565946703&code=8888
+{
+  "mobile": 15565946703,
+  "code": 8888
+}

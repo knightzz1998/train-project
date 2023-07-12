@@ -8,10 +8,7 @@ import cn.knightzz.train.member.response.MemberLoginResp;
 import cn.knightzz.train.member.service.MemberService;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author 王天赐
@@ -45,7 +42,7 @@ public class MemberController {
     }
 
     @PostMapping("/send-code")
-    public CommonResp<String> sendCode(@Valid MemberSendCodeReq sendCodeReq) {
+    public CommonResp<String> sendCode(@Valid @RequestBody MemberSendCodeReq sendCodeReq) {
         String code = memberService.sendCode(sendCodeReq.getMobile());
         CommonResp<String> commonResp = new CommonResp<>();
         commonResp.setContent(code);
@@ -53,7 +50,7 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public CommonResp<MemberLoginResp> login(@Valid MemberLoginReq loginReq) {
+    public CommonResp<MemberLoginResp> login(@Valid @RequestBody MemberLoginReq loginReq) {
         MemberLoginResp loginResp = memberService.login(loginReq);
         return new CommonResp<>(loginResp);
     }
