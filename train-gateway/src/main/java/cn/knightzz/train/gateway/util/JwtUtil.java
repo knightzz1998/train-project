@@ -1,4 +1,4 @@
-package cn.knightzz.train.common.util;
+package cn.knightzz.train.gateway.util;
 
 import cn.hutool.core.date.DateField;
 import cn.hutool.core.date.DateTime;

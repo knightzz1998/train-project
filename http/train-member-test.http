@@ -32,3 +32,8 @@ Content-Type: application/json
   "mobile": 15565946703,
   "code": 8888
 }
+
+### 测试Token拦截
+GET http://localhost:8000/train-member/hello
+Accept: application/json
+token: 123
