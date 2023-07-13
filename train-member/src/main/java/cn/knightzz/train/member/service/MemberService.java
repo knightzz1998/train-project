@@ -3,9 +3,9 @@ package cn.knightzz.train.member.service;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
-import cn.hutool.core.util.RandomUtil;
 import cn.knightzz.train.common.exception.BusinessException;
 import cn.knightzz.train.common.exception.BusinessExceptionEnum;
+import cn.knightzz.train.common.util.JwtUtil;
 import cn.knightzz.train.common.util.SnowUtil;
 import cn.knightzz.train.member.domain.Member;
 import cn.knightzz.train.member.domain.MemberExample;
@@ -105,8 +105,8 @@ public class MemberService {
 
         // 拷贝属性
         MemberLoginResp memberLoginResp = BeanUtil.copyProperties(member, MemberLoginResp.class);
-        // TODO 暂时使用字符串代替, 后续使用JWT
-        memberLoginResp.setToken(RandomUtil.randomString(6));
+        String token = JwtUtil.createToken(memberLoginResp.getId(), memberLoginResp.getMobile());
+        memberLoginResp.setToken(token);
         return memberLoginResp;
     }
 
