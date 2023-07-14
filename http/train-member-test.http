@@ -32,8 +32,13 @@ Content-Type: application/json
   "mobile": 15565946703,
   "code": 8888
 }
+> {%
+    client.log(JSON.stringify(response.body));
+    client.log(JSON.stringify(response.body.content.token));
+    client.global.set("token", response.body.content.token);
+%}
 
 ### 测试Token拦截
 GET http://localhost:8000/train-member/hello
 Accept: application/json
-token: 123
+token: {{token}}

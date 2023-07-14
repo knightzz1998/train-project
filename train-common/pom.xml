@@ -19,6 +19,13 @@
 
     <dependencies>
 
+
+        <!-- 集成分页插件 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+        </dependency>
+
         <!-- 集成 校验框架 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
