@@ -19,7 +19,6 @@
 
     <dependencies>
 
-
         <!-- 集成分页插件 -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
