@@ -20,6 +20,7 @@
         <module>train-gateway</module>
         <module>train-generator</module>
         <module>train-business</module>
+        <module>train-batch</module>
     </modules>
     <properties>
         <java.version>17</java.version>
